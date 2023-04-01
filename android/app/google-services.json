@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "2873914876",
+    "firebase_url": "https://ecotags-default-rtdb.firebaseio.com",
+    "project_id": "ecotags",
+    "storage_bucket": "ecotags.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2873914876:android:f41b4eb70c3313793b2e79",
+        "android_client_info": {
+          "package_name": "com.example.ecotags"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2873914876-ld4dj9h4c57l5mqipka00h993cpje086.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrf3dtcKCqrMSmcSQ_3s8Mmis3-1meeg8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2873914876-ld4dj9h4c57l5mqipka00h993cpje086.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
