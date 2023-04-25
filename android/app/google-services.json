@@ -1,9 +1,9 @@
 {
   "project_info": {
     "project_number": "2873914876",
-    "firebase_url": "https://ecotags-default-rtdb.firebaseio.com",
-    "project_id": "ecotags",
-    "storage_bucket": "ecotags.appspot.com"
+    "firebase_url": "https://cs305-ecotags.firebaseio.com",
+    "project_id": "cs305-ecotags",
+    "storage_bucket": "cs305-ecotags.appspot.com"
   },
   "client": [
     {
@@ -21,7 +21,8 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCrf3dtcKCqrMSmcSQ_3s8Mmis3-1meeg8"
+          
+          "current_key": "AIzaSyB4khIA_9Drj_oJ95Q_dF_G3s7QAWHkvfs"
         }
       ],
       "services": {
