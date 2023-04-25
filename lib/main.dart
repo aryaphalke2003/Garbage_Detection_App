@@ -65,6 +65,7 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           title: 'Eco Tags',
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(
             backgroundColor: backgroundColor,
             primaryColor: primaryColor,
