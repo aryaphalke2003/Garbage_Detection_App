@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
               create: (_) => UserDetailsProvider()),
           ChangeNotifierProvider<CameraProvider>(
               create: (_) => CameraProvider(
-                    camera: camera,
+                    camera: camera ,
                   )),
           ChangeNotifierProvider(
               create: (_) => MapProvider(
