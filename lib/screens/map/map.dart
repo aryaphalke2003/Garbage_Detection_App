@@ -22,7 +22,7 @@ class MapWidget extends StatefulWidget {
 class _MapWidgetState extends State<MapWidget> {
   Completer<GoogleMapController> _controller = Completer();
 
-  bool _isMapLoading = true;
+  bool _isMapLoading = false;
   List<MapObject> _mapObjects = [];
 
   @override
@@ -82,7 +82,7 @@ class _MapWidgetState extends State<MapWidget> {
                 initialCameraPosition: _cameraPosition,
                 onMapCreated: (GoogleMapController controller) {
                   _controller.complete(controller);
-                  controller.setMapStyle(map.mapStyle);
+                  // controller.setMapStyle(map.mapStyle);
                 },
                 markers: _getMapMarkers(_mapObjects))
           ],
