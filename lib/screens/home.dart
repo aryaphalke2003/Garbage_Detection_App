@@ -61,8 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _getUserDetails().then((value) => setState(() {
           // set in Provider
-          Provider.of<UserDetailsProvider>(context, listen: false)
-              .setUserDetails(value);
+          Provider.of<UserDetailsProvider>(context, listen: false).setUserDetails(value);
 
           isLoading = false;
         }));

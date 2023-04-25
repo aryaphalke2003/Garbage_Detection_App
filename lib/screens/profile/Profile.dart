@@ -3,6 +3,9 @@ import 'package:ecotags/providers/user/UserDetailsProvider.dart';
 import 'package:ecotags/screens/profile/PhotoGallery.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ecotags/screens/welcome.dart';
+
 
 class Profile extends StatefulWidget {
   @override
@@ -49,7 +52,8 @@ class _ProfileState extends State<Profile> {
                             ),
                             Container(
                               child: Text(
-                                user.fullName,
+                              
+                                user.firstName,
                                 style: TextStyle(
                                     color: primaryColor,
                                     fontSize: 18,
@@ -58,7 +62,7 @@ class _ProfileState extends State<Profile> {
                             ),
                             Container(
                               child: Text(
-                                user.userLevel,
+                                user.rank,
                                 style: TextStyle(
                                     color: Colors.blueGrey[400],
                                     fontSize: 14,
@@ -81,7 +85,7 @@ class _ProfileState extends State<Profile> {
                             children: [
                               Container(
                                 child: Text(
-                                  '@${user.userName}',
+                                  '@${user.firstName}',
                                   style: TextStyle(
                                       color: primaryColor,
                                       fontSize: 18,
@@ -91,7 +95,7 @@ class _ProfileState extends State<Profile> {
                               ),
                               Container(
                                 child: Text(
-                                  user.points.toString() + ' Points',
+                                  '${user.points} Points',
                                   style: TextStyle(
                                       color: Colors.blueGrey[400],
                                       fontSize: 14,
@@ -150,3 +154,34 @@ class _ProfileState extends State<Profile> {
     });
   }
 }
+
+
+// class ProfilePage extends StatelessWidget {
+//   const ProfilePage({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//      final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Profile'),
+//       ),
+//       body: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: <Widget>[
+//             Text('Welcome to your profile!'),
+//             SizedBox(height: 20),
+//             ElevatedButton(
+//               child: Text('Logout'),
+//               onPressed: () async {
+//                 await _firebaseAuth.signOut();
+//                 Navigator.of(context).pushNamed(WelcomeScreen.tag);
+//               },
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

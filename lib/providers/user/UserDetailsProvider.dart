@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecotags/screens/profile/PhotoGallery.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -9,61 +10,83 @@ enum UserLevel {
 }
 
 class UserDetailsProvider extends ChangeNotifier {
-  User user = FirebaseAuth.instance.currentUser!;
-
-  int _age = 0;
-  String _userName = 'aneeMangal';
-  UserLevel _userLevel = UserLevel.ROOKIE;
-  String _pfpUrl =
-      'https://firebasestorage.googleapis.com/v0/b/ecotags.appspot.com/o/uploads%2Faneeket.png?alt=media&token=480414e7-4c1a-47f5-8c98-014527dee222';
-
-  int _points = 120;
-  List<Picture> _pictures = [
-    Picture(
-        "https://images.pexels.com/photos/1772973/pexels-photo-1772973.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-        "Stephan Seeber"),
-    Picture(
-        "https://images.pexels.com/photos/1758531/pexels-photo-1758531.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-        "Liam Gant"),
-  ];
+  final User user = FirebaseAuth.instance.currentUser!;
+  late String _fullName;
+  late String _firstName;
+  late String _lastName;
+  late String _email;
+  late String _rank;
+  late int _points;
+  int _age = 20;
+  String _pfpUrl ='https://firebasestorage.googleapis.com/v0/b/cs305-ecotags.appspot.com/o/uploads%2FCAP1366030539152407173.jpg?alt=media&token=dd285df3-8a1b-42c1-8411-11f3b3371384';
+  List<Picture> _pictures = [Picture("https://images.pexels.com/photos/1772973/pexels-photo-1772973.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260","Stephan Seeber"),Picture("https://images.pexels.com/photos/1758531/pexels-photo-1758531.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260","Liam Gant"),];
+  
   String get pfpUrl => _pfpUrl;
-  List<Picture> get pictures => _pictures;
   int get userAge => _age;
-  String get userName => _userName;
-
-  String _fullName = 'Aneeket Mangal';
-  String get fullName => _fullName;
-
-  String get userLevel => 'Rookie';
-
+  List<Picture> get pictures => _pictures;
+  String get firstName => _firstName;
+  String get lastName => _lastName;
+  String get email => _email;
+  String get rank => _rank;
   int get points => _points;
-  void updateAge(int age) {
-    _age = age;
+
+  UserDetailsProvider() {
+    _loadUserDetails();
+  }
+
+  void _loadUserDetails() async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .get();
+    final data = snapshot.data()!;
+    _firstName = data['firstName'];
+    _lastName = data['lastName'];
+    _email = data['email'];
+    _rank = data['rank'];
+    _points = data['points'];
     notifyListeners();
   }
 
   isAuthenticated() {
-    if (user != null) {
-      return true;
-    } else {
-      return false;
-    }
+    return user != null;
   }
 
-  void getUserName() {
-    _userName = user.displayName!;
+  void updateName(String firstName, String lastName) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .update({
+      'firstName': firstName,
+      'lastName': lastName,
+    });
+    _firstName = firstName;
+    _lastName = lastName;
     notifyListeners();
   }
 
-  void updateName(String name) {
-    _userName = name;
+  void updateRank(String rank) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .update({'rank': rank});
+    _rank = rank;
+    notifyListeners();
+  }
+
+  void updatePoints(int points) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .update({'points': points});
+    _points = points;
     notifyListeners();
   }
 
   void setUserDetails(dynamic details) {
-    _fullName = details['first_name'] + ' ' + details['last_name'];
+    _fullName = details['firstName'] + ' ' + details['lastName'];
     _age = details['age'];
-    _userName = details['username'];
+    _firstName = details['firstName'];
 
     // _pfpUrl = details['pfpUrl'];
     _points = details['points'];
@@ -72,7 +95,6 @@ class UserDetailsProvider extends ChangeNotifier {
         _pictures.add(Picture(picture['url'], picture['id']));
       }
     }
-
-    notifyListeners();
   }
+
 }
