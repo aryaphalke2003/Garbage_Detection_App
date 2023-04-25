@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:ecotags/screens/home.dart';
+import 'package:ecotags/screens/welcome.dart';
+
 
 class SignUpScreen extends StatefulWidget {
   static String tag = 'register-page';
@@ -230,8 +232,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   'firstName': firstNameTextEditController.text,
                                   'lastName': lastNameTextEditController.text,
                                 }).then((userInfoValue) {
-                                  Navigator.of(context)
-                                      .pushNamed(HomeScreen.tag);
+                                 Navigator.of(context).pushNamed(WelcomeScreen.tag);
+                                // Navigator.of(context).pop();
                                 });
                               }).catchError((onError) {
                                 print(onError);
