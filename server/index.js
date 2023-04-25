@@ -40,6 +40,7 @@ const imageDb = db.collection("images");
 // // --------------------------------------------------------------------------------------------------//
 
 app.post("/addUser", async (req, res) => {
+  console.log(req.body.username)
   const user = usersDb.doc(req.body.username);
   const doc = await user.get();
   if (doc.exists) {
@@ -47,8 +48,8 @@ app.post("/addUser", async (req, res) => {
       message: "User Name is already taken",
     });
   } else {
-    var index = Math.floor(Math.random() * pfp.length);
-    var pfpUrl = pfp[index];
+    // var index = Math.floor(Math.random() * pfp.length);
+    // var pfpUrl = pfp[index];
     // console.log(pfpUrl);
     try {
       await usersDb.doc(req.body.id).set({
@@ -58,7 +59,7 @@ app.post("/addUser", async (req, res) => {
         last_name: req.body.last_name,
         age: req.body.age,
         rank: req.body.rank,
-        pfpUrl: pfpUrl,
+        // pfpUrl: pfpUrl,
         points: 0,
         id: req.body.id,
       });
@@ -152,13 +153,13 @@ app.post("/addImage", authorizeUser, async (req, res) => {
         res.status(500).send("image_not_added");
       });
 
-    // verifyImages(
-    //   id,
-    //   req.body.geotagLat,
-    //   req.body.geotagLong,
-    //   req.body.rank,
-    //   req.body.username
-    // );
+    verifyImages(
+      id,
+      req.body.geotagLat,
+      req.body.geotagLong,
+      req.body.rank,
+      req.body.username
+    );
   } catch (err) {
     console.log(err);
   }
