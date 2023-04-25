@@ -233,6 +233,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   'lastName': lastNameTextEditController.text,
                                   'email':emailTextEditController.text,
                                   'points':0,
+                                  'rank':"rookie",
+
                                 }).then((userInfoValue) {
                                  Navigator.of(context).pushNamed(WelcomeScreen.tag);
                                 // Navigator.of(context).pop();
