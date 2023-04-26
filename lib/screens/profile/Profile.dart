@@ -29,18 +29,18 @@ class _ProfileState extends State<Profile> {
               Flexible(
                 flex: 1,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  // crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Flexible(
-                      flex: 4,
+                      flex: 2,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          // crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.only(left: 10.0),
+                              padding: const EdgeInsets.only(),
                               child: CircleAvatar(
                                   radius: 50,
                                   backgroundImage: AssetImage(
@@ -49,33 +49,24 @@ class _ProfileState extends State<Profile> {
                                   // NetworkImage(user.pfpUrl),
                                   ),
                             ),
-                            Container(
-                              child: Text(
-                                user.firstName,
-                                style: TextStyle(
-                                    color: primaryColor,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Container(
-                              child: Text(
-                                user.rank,
-                                style: TextStyle(
-                                    color: Colors.blueGrey[400],
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
+                            // Container(
+                            //   child: Text(
+                            //     user.firstName,
+                            //     style: TextStyle(
+                            //         color: primaryColor,
+                            //         fontSize: 18,
+                            //         fontWeight: FontWeight.bold),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
                     ),
                     Flexible(
-                      flex: 4,
+                      flex: 2,
                       child: Container(
-                          padding: EdgeInsets.all(8.0),
-                          // padding: EdgeInsets.only(top: 50, left: 20, right: 20),
+                          // padding: EdgeInsets.all(8.0),
+                          padding: EdgeInsets.only(top: 0, left: 20, right: 20),
                           // show points and username in a column
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -101,18 +92,29 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ),
                               Container(
-                                  child: IconButton(
-                                icon: Icon(Icons.logout),
-                                color: Colors.white,
-                                onPressed: () async {
-                                  await FirebaseAuth.instance.signOut();
-                                  Navigator.of(context)
-                                      .pushNamed(WelcomeScreen.tag);
-                                },
-                              )),
+                                child: Text(
+                                  user.rank,
+                                  style: TextStyle(
+                                      color: Colors.blueGrey[400],
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
                             ],
                           )),
                     ),
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                          child: IconButton(
+                        icon: Icon(Icons.logout),
+                        color: Colors.white,
+                        onPressed: () async {
+                          await FirebaseAuth.instance.signOut();
+                          Navigator.of(context).pushNamed(WelcomeScreen.tag);
+                        },
+                      )),
+                    )
                   ],
                 ),
               ),
