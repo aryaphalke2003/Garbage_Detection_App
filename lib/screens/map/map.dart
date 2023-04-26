@@ -40,38 +40,38 @@ class _MapWidgetState extends State<MapWidget> {
     );
   }
 
-  // Marker _mapObjectToMarker(MapObject mapObject) {
-  //   return Marker(
-  //       markerId: MarkerId(mapObject.id),
-  //       position: LatLng(mapObject.latitude, mapObject.longitude),
-  //       icon: getIconForMapObject(mapObject.mapObjectType),
-  //       infoWindow: InfoWindow(
-  //           title: 'By: ${mapObject.title}', snippet: mapObject.details));
-  // }
-
   Marker _mapObjectToMarker(MapObject mapObject) {
-    if (mapObject.mapObjectType == MapObjectTypes.imageLocation) {
-      return Marker(
-        markerId: MarkerId(mapObject.id),
-        position: LatLng(mapObject.latitude, mapObject.longitude),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-        infoWindow: InfoWindow(
-          title: mapObject.title,
-          snippet: mapObject.details,
-        ),
-      );
-    } else {
-      return Marker(
+    return Marker(
         markerId: MarkerId(mapObject.id),
         position: LatLng(mapObject.latitude, mapObject.longitude),
         icon: getIconForMapObject(mapObject.mapObjectType),
         infoWindow: InfoWindow(
-          title: 'By: ${mapObject.title}',
-          snippet: mapObject.details,
-        ),
-      );
-    }
+            title: 'By: ${mapObject.title}', snippet: mapObject.details));
   }
+
+  // Marker _mapObjectToMarker(MapObject mapObject) {
+  //   if (mapObject.mapObjectType == MapObjectTypes.imageLocation) {
+  //     return Marker(
+  //       markerId: MarkerId(mapObject.id),
+  //       position: LatLng(mapObject.latitude, mapObject.longitude),
+  //       icon: getIconForMapObject(mapObject.mapObjectType),
+  //       infoWindow: InfoWindow(
+  //         title: mapObject.title,
+  //         snippet: mapObject.details,
+  //       ),
+  //     );
+  //   } else {
+  //     return Marker(
+  //       markerId: MarkerId(mapObject.id),
+  //       position: LatLng(mapObject.latitude, mapObject.longitude),
+  //       icon: getIconForMapObject(mapObject.mapObjectType),
+  //       infoWindow: InfoWindow(
+  //         title: 'By: ${mapObject.title}',
+  //         snippet: mapObject.details,
+  //       ),
+  //     );
+  //   }
+  // }
 
   // Set<Marker> _getMapMarkers(List<MapObject> mapObjects2) {
   //   Set<Marker> markers = Set();
