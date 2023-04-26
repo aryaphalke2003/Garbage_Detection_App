@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecotags/providers/MapProvider.dart';
 import 'package:ecotags/screens/loading.dart';
 import 'package:ecotags/services/ApiServices.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -38,14 +40,49 @@ class _MapWidgetState extends State<MapWidget> {
     );
   }
 
+  // Marker _mapObjectToMarker(MapObject mapObject) {
+  //   return Marker(
+  //       markerId: MarkerId(mapObject.id),
+  //       position: LatLng(mapObject.latitude, mapObject.longitude),
+  //       icon: getIconForMapObject(mapObject.mapObjectType),
+  //       infoWindow: InfoWindow(
+  //           title: 'By: ${mapObject.title}', snippet: mapObject.details));
+  // }
+
   Marker _mapObjectToMarker(MapObject mapObject) {
-    return Marker(
+    if (mapObject.mapObjectType == MapObjectTypes.imageLocation) {
+      return Marker(
+        markerId: MarkerId(mapObject.id),
+        position: LatLng(mapObject.latitude, mapObject.longitude),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+        infoWindow: InfoWindow(
+          title: mapObject.title,
+          snippet: mapObject.details,
+        ),
+      );
+    } else {
+      return Marker(
         markerId: MarkerId(mapObject.id),
         position: LatLng(mapObject.latitude, mapObject.longitude),
         icon: getIconForMapObject(mapObject.mapObjectType),
         infoWindow: InfoWindow(
-            title: 'By: ${mapObject.title}', snippet: mapObject.details));
+          title: 'By: ${mapObject.title}',
+          snippet: mapObject.details,
+        ),
+      );
+    }
   }
+
+  // Set<Marker> _getMapMarkers(List<MapObject> mapObjects2) {
+  //   Set<Marker> markers = Set();
+  //   // iterate over map objects
+  //   for (var mapObject in mapObjects2) {
+  //     // add marker to markers
+  //     markers.add(_mapObjectToMarker(mapObject));
+  //   }
+  //   return markers;
+  //   // return mapObjects.map((mapObject) => _mapObjectToMarker(mapObject)).toSet();
+  // }
 
   Set<Marker> _getMapMarkers(List<MapObject> mapObjects2) {
     Set<Marker> markers = Set();
@@ -55,7 +92,6 @@ class _MapWidgetState extends State<MapWidget> {
       markers.add(_mapObjectToMarker(mapObject));
     }
     return markers;
-    // return mapObjects.map((mapObject) => _mapObjectToMarker(mapObject)).toSet();
   }
 
   // restrict only to india
@@ -93,6 +129,39 @@ class _MapWidgetState extends State<MapWidget> {
     }
   }
 
+  // Future<List<MapObject>> _getMapObjects() async {
+  //   Position currUserLocation = await _getCurrPosition();
+  //   List<MapObject> locations = [
+  //     MapObject(
+  //       id: '1',
+  //       mapObjectType: MapObjectTypes.currUserPosition,
+  //       latitude: currUserLocation.latitude,
+  //       longitude: currUserLocation.longitude,
+  //       title: 'Test',
+  //       details: 'Test',
+  //     )
+  //   ];
+
+  //   // get locations
+  //   // add to mapObjects
+
+  //   ApiResponse response = await getApiCall("getLocations");
+  //   for (var location in response.data) {
+  //     print(location['location_type']);
+  //     locations.add(
+  //       MapObject(
+  //         id: location['id'].toString(),
+  //         mapObjectType: getMapObjectType(location['location_type']),
+  //         longitude: location['longitude'],
+  //         latitude: location['latitude'],
+  //         title: location['username'],
+  //         details: location['description'],
+  //       ),
+  //     );
+  //   }
+
+  //   return locations;
+  // }
   Future<List<MapObject>> _getMapObjects() async {
     Position currUserLocation = await _getCurrPosition();
     List<MapObject> locations = [
@@ -106,22 +175,32 @@ class _MapWidgetState extends State<MapWidget> {
       )
     ];
 
-    // get locations
-    // add to mapObjects
+    final QuerySnapshot userSnapshot =
+        await FirebaseFirestore.instance.collection('users').get();
 
-    ApiResponse response = await getApiCall("getLocations");
-    for (var location in response.data) {
-      print(location['location_type']);
-      locations.add(
-        MapObject(
-          id: location['id'].toString(),
-          mapObjectType: getMapObjectType(location['location_type']),
-          longitude: location['longitude'],
-          latitude: location['latitude'],
-          title: location['username'],
-          details: location['description'],
-        ),
-      );
+    for (QueryDocumentSnapshot userDoc in userSnapshot.docs) {
+      String userId = userDoc.id;
+
+      final QuerySnapshot imageSnapshot = await FirebaseFirestore.instance
+          .collection('images')
+          .doc(userId)
+          .collection('user_images')
+          .get();
+
+      for (QueryDocumentSnapshot imageDoc in imageSnapshot.docs) {
+        Map<String, dynamic>? data = imageDoc.data() as Map<String, dynamic>?;
+        print("FCK");
+        locations.add(
+          MapObject(
+            id: imageDoc.id,
+            mapObjectType: MapObjectTypes.imageLocation,
+            latitude: data!['latitude'],
+            longitude: data['longitude'],
+            title: 'img',
+            details: 'img',
+          ),
+        );
+      }
     }
 
     return locations;

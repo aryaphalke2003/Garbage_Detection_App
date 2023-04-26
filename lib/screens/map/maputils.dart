@@ -29,21 +29,36 @@ enum MapObjectTypes {
   // user position
   currUserPosition,
   userPosition,
-  nonUserPosition,
+  nonUserPosition, 
+  imageLocation,
 }
 
-// get icon for map object
 BitmapDescriptor getIconForMapObject(MapObjectTypes mapObjectType) {
   switch (mapObjectType) {
     case MapObjectTypes.currUserPosition:
       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen);
     case MapObjectTypes.userPosition:
       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue);
-
     case MapObjectTypes.nonUserPosition:
       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed);
+    case MapObjectTypes.imageLocation:
+      return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueYellow);
   }
 }
+
+
+// get icon for map object
+// BitmapDescriptor getIconForMapObject(MapObjectTypes mapObjectType) {
+//   switch (mapObjectType) {
+//     case MapObjectTypes.currUserPosition:
+//       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen);
+//     case MapObjectTypes.userPosition:
+//       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue);
+
+//     case MapObjectTypes.nonUserPosition:
+//       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed);
+//   }
+// }
 
 MapObjectTypes getMapObjectType(dynamic type) {
   if (type == "SELF") {
