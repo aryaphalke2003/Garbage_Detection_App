@@ -95,6 +95,7 @@ class UserDetailsProvider extends ChangeNotifier {
     _firstName = details['firstName'];
 
     // _pfpUrl = details['pfpUrl'];
+    //cheking 
     _points = details['points'];
     if (details.containsKey('pictures')) {
       for (var picture in details['pictures']) {
