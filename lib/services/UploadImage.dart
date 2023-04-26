@@ -31,7 +31,15 @@ Future<bool> uploadImage(XFile file) async {
     await FirebaseFirestore.instance
         .collection('images')
         .doc(uid)
-        .set({'url': downloadUrl, 'latitude': position.latitude, 'longitude': position.longitude});
+        .collection(
+            'user_images') // use a collection name that represents the user's images
+        .doc(DateTime.now()
+            .toString()) // use DateTime.now().toString() to get the current timestamp as a string
+        .set({
+      'url': downloadUrl,
+      'latitude': position.latitude,
+      'longitude': position.longitude
+    });
 
     return true;
   } catch (e) {

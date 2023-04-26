@@ -22,12 +22,13 @@ class UserDetailsProvider extends ChangeNotifier {
       'https://firebasestorage.googleapis.com/v0/b/cs305-ecotags.appspot.com/o/uploads%2FCAP1366030539152407173.jpg?alt=media&token=dd285df3-8a1b-42c1-8411-11f3b3371384';
 
   List<Picture> _pictures = [
-    Picture(
-        "https://images.pexels.com/photos/1772973/pexels-photo-1772973.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-        "Stephan Seeber"),
-    Picture(
-        "https://images.pexels.com/photos/1758531/pexels-photo-1758531.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-        "Liam Gant"),
+    // Picture(
+    //     "https://images.pexels.com/photos/1772973/pexels-photo-1772973.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    //     "Stephan Seeber"),
+    // Picture(
+    //     "https://images.pexels.com/photos/1758531/pexels-photo-1758531.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    //     "Liam Gant"),
+    
   ];
 
   String get pfpUrl => _pfpUrl;
@@ -44,6 +45,16 @@ class UserDetailsProvider extends ChangeNotifier {
   }
 
   void _loadUserDetails() async {
+    final picturesSnapshot = await FirebaseFirestore.instance
+    .collection('images')
+    .doc(user.uid)
+    .collection('user_images')
+    .get();
+
+_pictures = picturesSnapshot.docs
+    .map((doc) => Picture(doc['url'], doc.id))
+    .toList();
+
     final snapshot = await FirebaseFirestore.instance
         .collection('users')
         .doc(user.uid)

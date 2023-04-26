@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ecotags/screens/welcome.dart';
 
-
 class Profile extends StatefulWidget {
   @override
   _ProfileState createState() => _ProfileState();
@@ -52,7 +51,6 @@ class _ProfileState extends State<Profile> {
                             ),
                             Container(
                               child: Text(
-                              
                                 user.firstName,
                                 style: TextStyle(
                                     color: primaryColor,
@@ -102,6 +100,16 @@ class _ProfileState extends State<Profile> {
                                       fontWeight: FontWeight.w600),
                                 ),
                               ),
+                              Container(
+                                  child: IconButton(
+                                icon: Icon(Icons.logout),
+                                color: Colors.white,
+                                onPressed: () async {
+                                  await FirebaseAuth.instance.signOut();
+                                  Navigator.of(context)
+                                      .pushNamed(WelcomeScreen.tag);
+                                },
+                              )),
                             ],
                           )),
                     ),
