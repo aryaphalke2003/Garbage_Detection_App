@@ -1,47 +1,41 @@
 import 'dart:io';
-
-import 'package:ecotags/services/ApiServices.dart';
+import 'package:camera/camera.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:geolocator/geolocator.dart';
-// ignore: depend_on_referenced_packages
 import 'package:path/path.dart' as Path;
-import 'package:camera/camera.dart';
 
-String serverURL = 'http://localhost:5000';
+Future<bool> uploadImage(XFile file) async {
+  // Get the current user's UID
+  final User? user = FirebaseAuth.instance.currentUser;
+  final uid = user?.uid;
 
-getURI(String path) {
-  return Uri.parse("$serverURL/$path");
-}
-
-uploadImage(XFile file) async {
-  // get firebase usesr
-
-  // Create a storage reference from our app
-  Position position = await Geolocator.getCurrentPosition(
+  // Get the user's location
+  final position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high);
-  File fileObject = File(file.path);
-  if (fileObject == null) {
-    return;
-  }
 
-  // Create a reference to the location you want to upload to in firebase
+  // Create a reference to the location you want to upload to in Firebase Storage
   final storageRef = FirebaseStorage.instance
       .ref("uploads")
-      .child(Path.basename(fileObject.path));
-  try {
-    TaskSnapshot snapshot = await storageRef.putFile(fileObject);
-    // get the download url
-    String downloadURL = await snapshot.ref.getDownloadURL();
+      .child("$uid/${Path.basename(file.path)}");
 
-    await postApiCall({
-      "url": downloadURL,
-      "latitude": position.latitude,
-      "longitude": position.longitude,
-    }, "addImage");
-    // upload the download url to firestore
+  try {
+    // Upload the image file to Firebase Storage
+    final snapshot = await storageRef.putFile(File(file.path));
+
+    // Get the download URL of the uploaded image
+    final downloadUrl = await snapshot.ref.getDownloadURL();
+
+    // Save the download URL to Firestore with the current user's UID as the document ID
+    await FirebaseFirestore.instance
+        .collection('images')
+        .doc(uid)
+        .set({'url': downloadUrl, 'latitude': position.latitude, 'longitude': position.longitude});
 
     return true;
   } catch (e) {
+    print(e);
     return false;
   }
 }

@@ -18,9 +18,18 @@ class UserDetailsProvider extends ChangeNotifier {
   late String _rank;
   late int _points;
   int _age = 20;
-  String _pfpUrl ='https://firebasestorage.googleapis.com/v0/b/cs305-ecotags.appspot.com/o/uploads%2FCAP1366030539152407173.jpg?alt=media&token=dd285df3-8a1b-42c1-8411-11f3b3371384';
-  List<Picture> _pictures = [Picture("https://images.pexels.com/photos/1772973/pexels-photo-1772973.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260","Stephan Seeber"),Picture("https://images.pexels.com/photos/1758531/pexels-photo-1758531.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260","Liam Gant"),];
-  
+  String _pfpUrl =
+      'https://firebasestorage.googleapis.com/v0/b/cs305-ecotags.appspot.com/o/uploads%2FCAP1366030539152407173.jpg?alt=media&token=dd285df3-8a1b-42c1-8411-11f3b3371384';
+
+  List<Picture> _pictures = [
+    Picture(
+        "https://images.pexels.com/photos/1772973/pexels-photo-1772973.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "Stephan Seeber"),
+    Picture(
+        "https://images.pexels.com/photos/1758531/pexels-photo-1758531.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "Liam Gant"),
+  ];
+
   String get pfpUrl => _pfpUrl;
   int get userAge => _age;
   List<Picture> get pictures => _pictures;
@@ -53,10 +62,7 @@ class UserDetailsProvider extends ChangeNotifier {
   }
 
   void updateName(String firstName, String lastName) async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(user.uid)
-        .update({
+    await FirebaseFirestore.instance.collection('users').doc(user.uid).update({
       'firstName': firstName,
       'lastName': lastName,
     });
@@ -97,4 +103,7 @@ class UserDetailsProvider extends ChangeNotifier {
     }
   }
 
+
+
+  
 }

@@ -25,10 +25,7 @@ class CustomNavButton extends GButton {
 }
 
 List<CustomNavButton> bottomNavItems = [
-  CustomNavButton(
-    icon: CupertinoIcons.search,
-    text: 'Search',
-  ),
+   
   CustomNavButton(
     icon: CupertinoIcons.camera,
     text: 'Camera',

@@ -61,7 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _getUserDetails().then((value) => setState(() {
           // set in Provider
-          Provider.of<UserDetailsProvider>(context, listen: false).setUserDetails(value);
+          Provider.of<UserDetailsProvider>(context, listen: false)
+              .setUserDetails(value);
 
           isLoading = false;
         }));
@@ -86,40 +87,38 @@ class _HomeScreenState extends State<HomeScreen> {
           if (isLoading == 0) ...[
             LoadingWidget(message: "Loading Ecotags...")
           ] else if (_currIndex == 0) ...[
-            Center(child: Text('Search'))
-          ] else if (_currIndex == 1) ...[
             CameraWidget()
-          ] else if (_currIndex == 2) ...[
+          ] else if (_currIndex == 1) ...[
             MapWidget()
-          ] else if (_currIndex == 3) ...[
+          ] else if (_currIndex == 2) ...[
             Profile()
           ],
-          if (_currIndex == 2) ...[
-            Positioned(
-                left: 10,
-                top: 40,
-                child: Container(
-                  width: 45,
-                  height: 45,
-                  padding: const EdgeInsets.all(1),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10)),
-                  // put child at center
+          // if (_currIndex == 2) ...[
+          //   Positioned(
+          //       left: 10,
+          //       top: 40,
+          //       child: Container(
+          //         width: 45,
+          //         height: 45,
+          //         padding: const EdgeInsets.all(1),
+          //         decoration: BoxDecoration(
+          //             color: Colors.white,
+          //             borderRadius: BorderRadius.circular(10)),
+          //         // put child at center
 
-                  child: IconButton(
-                      iconSize: 30,
-                      icon: const Icon(CupertinoIcons.list_dash),
-                      // onPressed: () => Scaffold.of(context).openDrawer()),
-                      onPressed: () =>
-                          _scaffoldState.currentState!.openDrawer()),
-                )),
-            Positioned(bottom: 10, right: 10, child: PointsViewer(points: 276)),
-            Positioned(
-                bottom: 10,
-                left: 10,
-                child: ClimateParametersViewer(aqi: 118, temperature: 16))
-          ]
+          //         child: IconButton(
+          //             iconSize: 30,
+          //             icon: const Icon(CupertinoIcons.list_dash),
+          //             // onPressed: () => Scaffold.of(context).openDrawer()),
+          //             onPressed: () =>
+          //                 _scaffoldState.currentState!.openDrawer()),
+          //       )),
+          //   Positioned(bottom: 10, right: 10, child: PointsViewer(points: 276)),
+          //   Positioned(
+          //       bottom: 10,
+          //       left: 10,
+          //       child: ClimateParametersViewer(aqi: 118, temperature: 16))
+          // ]
         ]));
   }
 
