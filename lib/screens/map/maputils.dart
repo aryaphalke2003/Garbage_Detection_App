@@ -14,14 +14,19 @@ class MapObject {
   // map object details
   final String details;
 
+  final String imageurl;
+
   MapObject({
     required this.id,
     required this.mapObjectType,
     required this.latitude,
     required this.longitude,
     required this.title,
-    required this.details,
+    required this.details, 
+    required this.imageurl,
   });
+
+  
 }
 
 // enum of map objects

@@ -40,13 +40,35 @@ class _MapWidgetState extends State<MapWidget> {
     );
   }
 
+  // Marker _mapObjectToMarker(MapObject mapObject) {
+  //   return Marker(
+  //       markerId: MarkerId(mapObject.id),
+  //       position: LatLng(mapObject.latitude, mapObject.longitude),
+  //       icon: getIconForMapObject(mapObject.mapObjectType),
+  //       infoWindow: InfoWindow(
+  //           title: 'By: ${mapObject.title}', snippet: mapObject.details));
+  // }
+
   Marker _mapObjectToMarker(MapObject mapObject) {
     return Marker(
         markerId: MarkerId(mapObject.id),
         position: LatLng(mapObject.latitude, mapObject.longitude),
         icon: getIconForMapObject(mapObject.mapObjectType),
         infoWindow: InfoWindow(
-            title: 'By: ${mapObject.title}', snippet: mapObject.details));
+          title: 'By: ${mapObject.title}',
+          snippet: mapObject.details,
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text(mapObject.title),
+                  content: Image.network(mapObject.imageurl),
+                );
+              },
+            );
+          },
+        ));
   }
 
   // Marker _mapObjectToMarker(MapObject mapObject) {
@@ -171,7 +193,8 @@ class _MapWidgetState extends State<MapWidget> {
         latitude: currUserLocation.latitude,
         longitude: currUserLocation.longitude,
         title: 'Test',
-        details: 'Test',
+        details: 'Test', 
+        imageurl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fnature%2F&psig=AOvVaw0tGasV8WyxixbiRdFblGKr&ust=1682708677654000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLjL2Lrgyv4CFQAAAAAdAAAAABAE',
       )
     ];
 
@@ -189,7 +212,8 @@ class _MapWidgetState extends State<MapWidget> {
 
       for (QueryDocumentSnapshot imageDoc in imageSnapshot.docs) {
         Map<String, dynamic>? data = imageDoc.data() as Map<String, dynamic>?;
-        print("FCK");
+        print('fck');
+        print(data);
         locations.add(
           MapObject(
             id: imageDoc.id,
@@ -197,7 +221,8 @@ class _MapWidgetState extends State<MapWidget> {
             latitude: data!['latitude'],
             longitude: data['longitude'],
             title: 'img',
-            details: 'img',
+            details: 'img', 
+            imageurl: data['url'],
           ),
         );
       }

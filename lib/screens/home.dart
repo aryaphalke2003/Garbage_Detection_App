@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isLoading = true;
   int _currIndex = 2;
   String _name = 'World';
-  List<MapObject> _mapObjects = [
+  final List<MapObject> _mapObjects = [
     MapObject(
       id: '1',
       mapObjectType: MapObjectTypes.currUserPosition,
@@ -44,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
       longitude: 0.0,
       title: 'Test',
       details: 'Test',
+      imageurl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fnature%2F&psig=AOvVaw0tGasV8WyxixbiRdFblGKr&ust=1682708677654000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLjL2Lrgyv4CFQAAAAAdAAAAABAE',
     ),
   ];
 
