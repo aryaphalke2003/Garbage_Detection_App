@@ -56,7 +56,7 @@ class _MapWidgetState extends State<MapWidget> {
         icon: getIconForMapObject(mapObject.mapObjectType),
         infoWindow: InfoWindow(
           title: 'By: ${mapObject.title}',
-          snippet: mapObject.details,
+          snippet:  'Click to see the ' +mapObject.details,
           onTap: () {
             showDialog(
               context: context,
