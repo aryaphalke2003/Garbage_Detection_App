@@ -18,26 +18,6 @@ const db = fs.firestore();
 const usersDb = db.collection("users");
 const imageDb = db.collection("images");
 
-// // // ----------cron job of sending regular get requests to the server so that render does not sleep!-----------//
-// //
-// // const cron = require("node-cron");
-// //
-// // const link_to_site = `https://eco-tags.onrender.com`;
-//
-// cron.schedule("0 */15 * * * *", () => {
-//   axios
-//     .get(link_to_site, {
-//       headers: { "Accept-Encoding": "gzip,deflate,compress" },
-//     })
-//     .then((req, res) => {
-//       console.log(`ok`);
-//     })
-//     .catch((err) => {
-//       // console.log(err)
-//     });
-// });
-//
-// // --------------------------------------------------------------------------------------------------//
 
 app.post("/addUser", async (req, res) => {
   console.log(req.body.username)
@@ -173,7 +153,7 @@ app.put("/updateUser", async (req, res) => {
     });
     res.status(200).send("user_updated");
   } catch (err) {
-    console.log(err);
+    res.status(500).send("Internal Server Error")
   }
 });
 
@@ -292,10 +272,12 @@ app.get("/userImages", authorizeUser, async (req, res) => {
     });
     res.status(200).json(userImages);
   } catch (err) {
-    console.log(err);
+    res.status(404).send('Some error occured')
   }
 });
 
 app.listen(PORT, () => {
-  console.log(`listening on port ${PORT}`);
+  // console.log(`listening on port ${PORT}`);
 });
+
+module.exports = app.listen(3000);
