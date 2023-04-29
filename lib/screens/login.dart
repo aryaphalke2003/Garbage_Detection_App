@@ -33,7 +33,7 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 400,
+       height:700,
         padding: EdgeInsets.only(left: 20, right: 20),
         decoration: BoxDecoration(
             color: primaryColor,
@@ -148,18 +148,20 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                     "Don't have an account?",
                     style: TextStyle(color: appColor, fontSize: 20),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SignUpScreen()));
-                    },
-                    child: Text(
-                      "Register",
-                      style: TextStyle(color: extraColor, fontSize: 20),
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignUpScreen()));
+                      },
+                      child: Text(
+                        "Register",
+                        style: TextStyle(color: extraColor, fontSize: 20),
+                      ),
                     ),
-                  )
+                  ),
                 ],
               )
             ]));
