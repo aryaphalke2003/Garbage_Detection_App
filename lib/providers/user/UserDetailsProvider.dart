@@ -52,7 +52,7 @@ class UserDetailsProvider extends ChangeNotifier {
     .get();
 
 _pictures = picturesSnapshot.docs
-    .map((doc) => Picture(doc['url'], doc.id))
+    .map((doc) => Picture(doc['url'], doc.id , doc['latitude'],doc['longitude']))
     .toList();
 
     final snapshot = await FirebaseFirestore.instance
@@ -110,7 +110,7 @@ _pictures = picturesSnapshot.docs
     _points = details['points'];
     if (details.containsKey('pictures')) {
       for (var picture in details['pictures']) {
-        _pictures.add(Picture(picture['url'], picture['id']));
+        _pictures.add(Picture(picture['url'], picture['id'],picture['latitude'],picture['longitude']));
       }
     }
   }

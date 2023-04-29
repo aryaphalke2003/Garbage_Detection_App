@@ -6,7 +6,10 @@ import 'package:flutter/src/widgets/framework.dart';
 class Picture {
   final String image;
   final String name;
-  Picture(this.image, this.name);
+  final double latitude;
+  final double longitude;
+  Picture(this.image, this.name, this.latitude, this.longitude);
+
 }
 
 class PictureGallery extends StatefulWidget {
