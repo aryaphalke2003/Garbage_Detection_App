@@ -56,7 +56,7 @@ class _MapWidgetState extends State<MapWidget> {
         icon: getIconForMapObject(mapObject.mapObjectType),
         infoWindow: InfoWindow(
           title: 'By: ${mapObject.title}',
-          snippet:  'Click to see the ' +mapObject.details,
+          snippet: 'Click to see the ' + mapObject.details,
           onTap: () {
             showDialog(
               context: context,
@@ -133,11 +133,12 @@ class _MapWidgetState extends State<MapWidget> {
           children: <Widget>[
             // remove buttons
             GoogleMap(
-                myLocationButtonEnabled: false,
+                myLocationButtonEnabled: true,
                 myLocationEnabled: true,
-                zoomControlsEnabled: false,
+                // zoomControlsEnabled: false,
                 mapToolbarEnabled: false,
                 initialCameraPosition: _cameraPosition,
+                 
                 onMapCreated: (GoogleMapController controller) {
                   _controller.complete(controller);
                   // controller.setMapStyle(map.mapStyle);
@@ -193,8 +194,9 @@ class _MapWidgetState extends State<MapWidget> {
         latitude: currUserLocation.latitude,
         longitude: currUserLocation.longitude,
         title: 'Test',
-        details: 'Test', 
-        imageurl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fnature%2F&psig=AOvVaw0tGasV8WyxixbiRdFblGKr&ust=1682708677654000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLjL2Lrgyv4CFQAAAAAdAAAAABAE',
+        details: 'Test',
+        imageurl:
+            'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fnature%2F&psig=AOvVaw0tGasV8WyxixbiRdFblGKr&ust=1682708677654000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLjL2Lrgyv4CFQAAAAAdAAAAABAE',
       )
     ];
 
@@ -214,17 +216,44 @@ class _MapWidgetState extends State<MapWidget> {
         Map<String, dynamic>? data = imageDoc.data() as Map<String, dynamic>?;
         print('fck');
         print(data);
-        locations.add(
-          MapObject(
-            id: imageDoc.id,
-            mapObjectType: MapObjectTypes.imageLocation,
-            latitude: data!['latitude'],
-            longitude: data['longitude'],
-            title: 'img',
-            details: 'img', 
-            imageurl: data['url'],
-          ),
-        );
+
+        if (data!['extent'] < 3 || data['extent']==null) {
+          locations.add(
+            MapObject(
+              id: imageDoc.id,
+              mapObjectType: MapObjectTypes.imageLocation,
+              latitude: data!['latitude'],
+              longitude: data['longitude'],
+              title: 'img',
+              details: 'img',
+              imageurl: data['url'],
+            ),
+          );
+        } else if (data!['extent'] <= 5) {
+          locations.add(
+            MapObject(
+              id: imageDoc.id,
+              mapObjectType: MapObjectTypes.userPosition,
+              latitude: data!['latitude'],
+              longitude: data['longitude'],
+              title: 'img',
+              details: 'img',
+              imageurl: data['url'],
+            ),
+          );
+        } else {
+          locations.add(
+            MapObject(
+              id: imageDoc.id,
+              mapObjectType: MapObjectTypes.nonUserPosition,
+              latitude: data!['latitude'],
+              longitude: data['longitude'],
+              title: 'img',
+              details: 'img',
+              imageurl: data['url'],
+            ),
+          );
+        }
       }
     }
 
