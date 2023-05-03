@@ -217,7 +217,7 @@ class _MapWidgetState extends State<MapWidget> {
         print('fck');
         print(data);
 
-        if (data!['extent'] < 3 || data['extent']==null) {
+        if (data!['extent'] < 5 ) {
           locations.add(
             MapObject(
               id: imageDoc.id,
@@ -229,7 +229,7 @@ class _MapWidgetState extends State<MapWidget> {
               imageurl: data['url'],
             ),
           );
-        } else if (data!['extent'] <= 5) {
+        } else if (data!['extent'] <= 8) {
           locations.add(
             MapObject(
               id: imageDoc.id,
