@@ -44,7 +44,7 @@ class CameraWidgetState extends State<CameraWidget> {
       // Get a specific camera from the list of available cameras.
       camera,
       // Define the resolution to use.
-      ResolutionPreset.max,
+      ResolutionPreset.high,
     );
 
     // Next, initialize the controller. This returns a Future.
