@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ecotags/screens/welcome.dart';
-
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -19,46 +19,67 @@ class _ProfileState extends State<Profile> {
     super.initState();
   }
 
+  void deletePicture(String pictureId) async {
+    // Delete the picture from Firestore
+    await FirebaseFirestore.instance
+        .collection('images')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('user_images')
+        .doc(pictureId)
+        .delete();
+
+      print("fcku");
+      print(pictureId);
+  
+    // Delete the image file from Firebase Storage
+    await FirebaseStorage.instance
+        .ref('uploads/${FirebaseAuth.instance.currentUser!.uid}/$pictureId.jpg')
+        .delete();
+
+    // Update the user's pictures list
+    Provider.of<UserDetailsProvider>(context, listen: false)
+        .deletePicture(pictureId);
+  }
 
   void _showImageDetailsDialog(Picture picture) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('Image Details'),
-        content: Container(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.network(
-                picture.image,
-                fit: BoxFit.cover,
-              ),
-              SizedBox(height: 10),
-              Text('Location: ${picture.latitude} ${picture.longitude}'),
-            ],
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Image Details'),
+          content: Container(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.network(
+                  picture.image,
+                  fit: BoxFit.cover,
+                ),
+                SizedBox(height: 10),
+                Text('Location: ${picture.latitude} ${picture.longitude}'),
+              ],
+            ),
           ),
-        ),
-        actions: [
-          TextButton(
-            child: Text('Delete'),
-            onPressed: () {
-              // Implement delete functionality here
-              Navigator.of(context).pop();
-            },
-          ),
-          TextButton(
-            child: Text('Close'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
-  );
-}
-
+          actions: [
+            TextButton(
+              child: Text('Delete'),
+              onPressed: () {
+                // Implement delete functionality here
+                deletePicture(picture.image);
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecotags/screens/profile/PhotoGallery.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 enum UserLevel {
@@ -113,6 +114,20 @@ _pictures = picturesSnapshot.docs
         _pictures.add(Picture(picture['url'], picture['id'],picture['latitude'],picture['longitude']));
       }
     }
+  }
+
+  Future<void> deletePicture(String pictureId) async {
+    await FirebaseFirestore.instance
+        .collection('images')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('user_images')
+        .doc(pictureId)
+        .delete();
+
+    // Delete the image file from Firebase Storage
+    await FirebaseStorage.instance
+        .ref('uploads/${FirebaseAuth.instance.currentUser!.uid}/$pictureId.jpg')
+        .delete();
   }
 
 

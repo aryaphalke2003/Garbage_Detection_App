@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-String serverURL = 'https://eco-tags-backend.onrender.com';
+//String serverURL = 'https://eco-tags-backend.onrender.com';
+String serverURL = 'https://abcd.com';
 
 getURI(String path) {
   return Uri.parse(serverURL + "/" + path);

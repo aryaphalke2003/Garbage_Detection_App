@@ -4,6 +4,7 @@ import 'package:ecotags/screens/camera/camera.dart';
 import 'package:ecotags/screens/loading.dart';
 import 'package:ecotags/screens/map/hamburger.dart';
 import 'package:ecotags/screens/map/map.dart';
+
 import 'package:ecotags/screens/map/maputils.dart';
 import 'package:ecotags/screens/profile/Profile.dart';
 import 'package:ecotags/services/ApiServices.dart';
