@@ -21,7 +21,7 @@ class _ProfileState extends State<Profile> {
 
   void deletePicture(String pictureId) async {
     // Delete the picture from Firestore
-
+    final User user = FirebaseAuth.instance.currentUser!;
     // Delete the image file from Firebase Storage
     print("\n\n\n\n       ");
     String uid_hai = FirebaseAuth.instance.currentUser!.uid;
@@ -36,25 +36,21 @@ class _ProfileState extends State<Profile> {
     }
 
     try {
-      final storageRef = FirebaseFirestore.instance
-          .collection('users')
-          .doc(uid_hai)
-          .collection('user_images');
+      final storageRef = await FirebaseFirestore.instance
+          .collection('images')
+          .doc(user.uid)
+          .collection('user_images')
+          .get();
+      print("are bhai bhai bhai ma ka bhosda");
       print(storageRef);
 
-      // Get a list of all the files in the folder
-      final QuerySnapshot userImagesSnapshot = await storageRef.get();
-
 // Iterate over all documents in the userImages collection
-      for (final doc in userImagesSnapshot.docs) {
-        final imageUrl = doc.get('url');
-
-        // Check if the URL matches the pictureId
-        if (imageUrl == pictureId) {
-          // Delete the document from the userImages collection
-          await storageRef.doc(doc.id).delete();
+      for (QueryDocumentSnapshot imageDoc in storageRef.docs) {
+        Map<String, dynamic>? data = imageDoc.data() as Map<String, dynamic>?;
+        if (data!['url'] == pictureId) {
+          // Delete the image
+          await imageDoc.reference.delete();
         }
-        // ...
       }
     } catch (e) {
       print(
