@@ -2,3 +2,4 @@ server/node_modules
 /build
 /.dart_tool
 pubspec.lock
+/node_modules
