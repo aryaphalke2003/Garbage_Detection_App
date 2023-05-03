@@ -21,24 +21,46 @@ class _ProfileState extends State<Profile> {
 
   void deletePicture(String pictureId) async {
     // Delete the picture from Firestore
-    await FirebaseFirestore.instance
-        .collection('images')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('user_images')
-        .doc(pictureId)
-        .delete();
 
-      print("fcku");
-      print(pictureId);
-  
     // Delete the image file from Firebase Storage
-    await FirebaseStorage.instance
-        .ref('uploads/${FirebaseAuth.instance.currentUser!.uid}/$pictureId.jpg')
-        .delete();
+    print("\n\n\n\n       ");
+    String uid_hai = FirebaseAuth.instance.currentUser!.uid;
+    print('uploads/${FirebaseAuth.instance.currentUser!.uid}/$pictureId');
+    try {
+      final ref = FirebaseStorage.instance.refFromURL(pictureId);
 
+      // Delete the image
+      await ref.delete();
+    } catch (e) {
+      print("\n\n\n\n       ");
+    }
+
+    try {
+      final storageRef = FirebaseFirestore.instance
+          .collection('users')
+          .doc(uid_hai)
+          .collection('user_images');
+      print(storageRef);
+
+      // Get a list of all the files in the folder
+      final QuerySnapshot userImagesSnapshot = await storageRef.get();
+
+// Iterate over all documents in the userImages collection
+      for (final doc in userImagesSnapshot.docs) {
+        final imageUrl = doc.get('url');
+
+        // Check if the URL matches the pictureId
+        if (imageUrl == pictureId) {
+          // Delete the document from the userImages collection
+          await storageRef.doc(doc.id).delete();
+        }
+        // ...
+      }
+    } catch (e) {
+      print(
+          "/////////////////////////////////////////////////////////////////////////////////////////////////////");
+    }
     // Update the user's pictures list
-    Provider.of<UserDetailsProvider>(context, listen: false)
-        .deletePicture(pictureId);
   }
 
   void _showImageDetailsDialog(Picture picture) {
