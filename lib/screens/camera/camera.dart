@@ -5,9 +5,12 @@ import 'package:camera/camera.dart';
 import 'package:ecotags/const/color.dart';
 import 'package:ecotags/providers/camera/CameraProvider.dart';
 import 'package:ecotags/screens/loading.dart';
+import 'package:ecotags/screens/map/maputils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../services/UploadImage.dart';
 
@@ -41,7 +44,7 @@ class CameraWidgetState extends State<CameraWidget> {
       // Get a specific camera from the list of available cameras.
       camera,
       // Define the resolution to use.
-      ResolutionPreset.high,
+      ResolutionPreset.max,
     );
 
     // Next, initialize the controller. This returns a Future.
@@ -141,6 +144,8 @@ class DisplayPictureScreen extends StatefulWidget {
 }
 
 class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
+  ///fucntion to store the latitude and longitude of all the users to avoid multiple images from same location
+
   bool isUploading = false;
 
   @override
@@ -159,12 +164,33 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
             setState(() {
               isUploading = true;
             });
-            await uploadImage(widget.image);
-            //show toast
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text('Image Uploaded successfully!'),
-              duration: Duration(seconds: 2),
-            ));
+
+            // Call the uploadImage function and get the result
+            String result = await uploadImage(widget.image);
+
+            // Show a message to the user based on the result
+            if (result == 'done') {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text('Image uploaded successfully!'),
+                duration: Duration(seconds: 2),
+              ));
+            } else if (result == 'nospace') {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text('Already uploaded by the users'),
+                duration: Duration(seconds: 2),
+              ));
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text('Error uploading image. Please try again.'),
+                duration: Duration(seconds: 2),
+              ));
+            }
+
+            // Update the UI
+            setState(() {
+              isUploading = false;
+            });
+
             Navigator.of(context).pop();
           },
           label: Text(isUploading ? "Uploading" : "Upload Image",

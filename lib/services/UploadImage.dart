@@ -2,13 +2,70 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecotags/screens/map/maputils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:path/path.dart' as Path;
 import 'package:http/http.dart' as http;
+import 'package:geolocator/geolocator.dart';
+import 'package:geodesy/geodesy.dart';
 
-Future<bool> uploadImage(XFile file) async {
+final double uploadRadius = 100.0; // Radius in meters
+
+//first check if the image can be uploaded or not
+
+Future<bool> imageuploadcheck() async {
+  Position position = await Geolocator.getCurrentPosition();
+  LatLng currentLocation = LatLng(position.latitude, position.longitude);
+
+  bool canUpload = true;
+  List<LatLng> existingUploadLocations =
+      []; // Replace with existing upload locations
+
+  final QuerySnapshot userSnapshot =
+      await FirebaseFirestore.instance.collection('users').get();
+
+  for (QueryDocumentSnapshot userDoc in userSnapshot.docs) {
+    String userId = userDoc.id;
+
+    final QuerySnapshot imageSnapshot = await FirebaseFirestore.instance
+        .collection('images')
+        .doc(userId)
+        .collection('user_images')
+        .get();
+
+    for (QueryDocumentSnapshot imageDoc in imageSnapshot.docs) {
+      Map<String, dynamic>? data = imageDoc.data() as Map<String, dynamic>?;
+      print('fck');
+      print(data);
+
+      existingUploadLocations.add(LatLng(data!['latitude'], data['longitude']));
+    }
+
+    for (LatLng existingLocation in existingUploadLocations) {
+      Geodesy geodesy = Geodesy();
+      double distance = geodesy
+          .distanceBetweenTwoGeoPoints(currentLocation, existingLocation)
+          .toDouble();
+
+      if (distance <= uploadRadius) {
+        canUpload = false;
+        break;
+      }
+    }
+  }
+  return canUpload;
+}
+
+Future<String> uploadImage(XFile file) async {
+
+
+   bool canUpload = await imageuploadcheck();
+
+   if(canUpload == false){
+     return 'nospace';
+   }
   // Get the current user's UID
   final User? user = FirebaseAuth.instance.currentUser;
   final uid = user?.uid;
@@ -70,9 +127,9 @@ Future<bool> uploadImage(XFile file) async {
       'extent': message
     });
 
-    return true;
+    return 'done';
   } catch (e) {
     print(e);
-    return false;
+    return 'error';
   }
 }

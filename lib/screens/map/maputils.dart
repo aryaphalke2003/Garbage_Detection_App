@@ -38,6 +38,8 @@ enum MapObjectTypes {
   imageLocation,
 }
 
+
+
 BitmapDescriptor getIconForMapObject(MapObjectTypes mapObjectType) {
   switch (mapObjectType) {
     case MapObjectTypes.currUserPosition:
