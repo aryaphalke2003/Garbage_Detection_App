@@ -3,3 +3,5 @@ server/node_modules
 /.dart_tool
 pubspec.lock
 /node_modules
+test/node_modules
+output

@@ -1,19 +1,21 @@
-require("dotenv").config();
+
+// require("dotenv").config();
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 const fs = require("firebase-admin");
 const { v4: uuidv4 } = require("uuid");
-const serviceAccount = require("../server/cs305-ecotags-firebase-adminsdk-89k2k-c6840e88c0.json");
+const serviceAccount = require("./cs305-ecotags-firebase-adminsdk-89k2k-c6840e88c0.json");
 const { pfp } = require("./pfp.js");
 const { authorizeUser } = require("./middleware.js");
 const { auth } = require("firebase-admin");
 
 app.use(express.json());
 
-fs.initializeApp({
-  credential: fs.credential.cert(serviceAccount),
-});
+// fs.initializeApp({
+//   credential: fs.credential.cert(serviceAccount),
+// });
 const db = fs.firestore();
 const usersDb = db.collection("users");
 const imageDb = db.collection("images");
@@ -280,4 +282,5 @@ app.listen(PORT, () => {
   // console.log(`listening on port ${PORT}`);
 });
 
-module.exports = app.listen(3000);
+module.exports = app.listen(PORT);
+

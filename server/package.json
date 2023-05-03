@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
-  "author": "Arpit078",
+  "author": "arya",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -17,7 +17,6 @@
     "jsonwebtoken": "^9.0.0",
     "node-cron": "^3.0.2",
     "nodemon": "^2.0.20",
-    "supertest": "^6.3.3",
     "uuid": "^9.0.0"
   }
 }
