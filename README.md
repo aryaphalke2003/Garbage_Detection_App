@@ -69,6 +69,19 @@ flutter run
 
 6. Another option is to install the `ecotags.apk` file on your android phone.
 
+### LCOV Code Coverage
+
+1. You will need to install lcov in linux using:
+```
+sudo apt install lcov
+```
+
+2. To generate report use the following command and report is generated in a new coverage folder:
+```
+flutter test --coverage && lcov --remove coverage/lcov.info 'lib/generated/*' 'lib/main.dart' 'lib/constants.dart' -o coverage/lcov.info && genhtml coverage/lcov.info -o coverage/html
+```
+
+
 
 That's it! You should now be able to run your Flutter app! 
 
