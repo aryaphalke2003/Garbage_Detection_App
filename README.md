@@ -14,3 +14,24 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+
+Steps to run(Windows):
+
+1.Download and install the latest release of  Flutter SDK.
+2.Extract the zip file and place the contained flutter in the desired installation location for the Flutter SDK.
+3.Edit environment variables.In the user variables under the entry called Path append the full path to flutter\bin .
+4.Run the command 'flutter doctor' to see if there are any platform dependencies you need to complete the setup.
+5.Download and install Android Studio. 
+6.Run flutter doctor to confirm that Flutter has located your installation of Android Studio. If Flutter cannot locate it, run 'flutter config --android-studio-dir=<directory>' to set the directory that Android Studio is installed to.
+7.Make sure that you have a version of Java 11 installed and that your JAVA_HOME environment variable is set to the JDK’s folder.
+8.Agree to the licenses of the Android SDK platform using command 'flutter doctor --android-licenses'.
+9.To run a Flutter app in IntelliJ IDEA, follow these steps:
+->Open your Flutter project in IntelliJ IDEA: Open IntelliJ IDEA and select "Open" from the "File" menu. Navigate to our project directory and select it.
+->Install the Flutter and Dart plugins:Go to "Settings" (or "Preferences" on a Mac), selecting "Plugins", and searching for "Flutter" and "Dart".
+->Set up a Flutter run configuration: To run your Flutter app, set up a run configuration. Open the "Run" menu and select "Edit Configurations". Click the "+" button to add a new configuration, select "Flutter" from the list of templates, and give your configuration a name.
+->Choose your target device: In the run configuration window, select the target device you want to use to run your app.Choose from a physical device connected to your computer(preferably a mobile).
+->Run the app: Once you've set up your run configuration and chosen your target device, click the "Run" button to launch the app. IntelliJ IDEA will build the app and deploy it to your target device.
+
+That's it! You should now be able to run your Flutter app in IntelliJ IDEA. 
