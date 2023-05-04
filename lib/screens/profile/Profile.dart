@@ -41,7 +41,7 @@ class _ProfileState extends State<Profile> {
           .doc(user.uid)
           .collection('user_images')
           .get();
-      print("are bhai bhai bhai ma ka bhosda");
+   
       print(storageRef);
 
 // Iterate over all documents in the userImages collection

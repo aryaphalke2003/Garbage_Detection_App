@@ -214,7 +214,7 @@ class _MapWidgetState extends State<MapWidget> {
 
       for (QueryDocumentSnapshot imageDoc in imageSnapshot.docs) {
         Map<String, dynamic>? data = imageDoc.data() as Map<String, dynamic>?;
-        print('fck');
+      
         print(data);
 
         if (data!['extent'] < 5 ) {

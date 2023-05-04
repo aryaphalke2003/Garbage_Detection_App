@@ -37,7 +37,7 @@ final double uploadRadius = 100.0; // Radius in meters
 
 //     for (QueryDocumentSnapshot imageDoc in imageSnapshot.docs) {
 //       Map<String, dynamic>? data = imageDoc.data() as Map<String, dynamic>?;
-//       print('fck');
+ 
 //       print(data);
 
 //       existingUploadLocations.add(LatLng(data!['latitude'], data['longitude']));
