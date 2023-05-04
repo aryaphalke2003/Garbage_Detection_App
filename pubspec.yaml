@@ -39,10 +39,11 @@ dependencies:
   flutter:
     sdk: flutter
 
-
+  
   geolocator: ^9.0.2
   google_maps_flutter: null
   google_nav_bar: ^5.0.6
+  mockito: ^5.4.0
   provider: ^5.0.0
 
 dev_dependencies:
