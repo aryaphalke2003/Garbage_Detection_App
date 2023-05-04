@@ -1,58 +1,55 @@
 # ecotags
 
-A new Flutter application.
+A new Flutter application that helps users track and reduce their carbon footprint by providing suggestions for eco-friendly choices and tracking progress over time.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is a starting point for a Flutter application. Follow these steps to get started:
 
-A few resources to get you started if this is your first Flutter project:
+### Get the Flutter SDK
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Download and install the latest release of the Flutter SDK from the official [Flutter website](https://flutter.dev/docs/get-started/install).
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+2. Extract the zip file and place the contained `flutter` folder in the desired installation location.
 
+### Update your path
 
+1. Go to Edit environment variables for your account.
 
-# Steps to run(Windows):
+2. Edit environment variables. In the user variables under the entry called Path, append the full path to `flutter\bin`.
 
-# Get the Flutter SDK
-->Download and install the latest release of  Flutter SDK from [https://docs.flutter.dev/get-started/install/windows]
+3. Run the command `flutter doctor` to see if there are any platform dependencies you need to complete the setup.
 
-->Extract the zip file and place the contained flutter in the desired installation location for the Flutter SDK.
+### Install Android Studio
 
-# Update your path
--> Go to Edit environment variables for your account.
-->Edit environment variables.In the user variables under the entry called Path append the full path to flutter\bin .
+1. Download and install Android Studio from the official [Android Studio website](https://developer.android.com/studio).
 
+2. Run `flutter doctor` to confirm that Flutter has located your installation of Android Studio. If Flutter cannot locate it, run `flutter config --android-studio-dir=<directory>` to set the directory that Android Studio is installed to.
 
-->Run the command 'flutter doctor' to see if there are any platform dependencies you need to complete the setup.
+### Set up your Android device
 
-# Install Android Studio
-->Download and install Android Studio from [https://developer.android.com/studio]
+1. Enable Developer options and USB debugging on your device.
 
-->Run flutter doctor to confirm that Flutter has located your installation of Android Studio. If Flutter cannot locate it, run 'flutter config --android-studio-dir=<directory>' to set the directory that Android Studio is installed to.
+2. Plug your Android device into your computer using a USB cable. If prompted on your device, authorize your computer to access your device.
 
+3. In your terminal, run the `flutter devices` command to verify that Flutter recognizes your connected Android device.
 
+### Agree to Android Licenses
 
-# Set up your Android device
-->Enable Developer options and USB debugging on your device.
-->Using a USB cable, plug your phone into your computer.If prompted on your device, authorize your computer to access your device.
-->In the terminal, run the flutter devices command to verify that Flutter recognizes your connected Android device.
+1. Make sure that you have a version of Java 11 installed and that your `JAVA_HOME` environment variable is set to the JDK's folder.
 
-# Agree to Android Licenses
-->Make sure that you have a version of Java 11 installed and that your JAVA_HOME environment variable is set to the JDK’s folder.
-->Agree to the licenses of the Android SDK platform using command 'flutter doctor --android-licenses'.
+2. Agree to the licenses of the Android SDK platform using the command `flutter doctor --android-licenses`.
 
+### Run the Flutter app
 
-# Run flutter App
-->Open your Flutter project in IntelliJ IDEA: Open IntelliJ IDEA and select "Open" from the "File" menu. Navigate to our project directory and select it.
-->Install the Flutter and Dart plugins:Go to "Settings" (or "Preferences" on a Mac), selecting "Plugins", and searching for "Flutter" and "Dart".
-->Set up a Flutter run configuration: To run your Flutter app, set up a run configuration. Open the "Run" menu and select "Edit Configurations". Click the "+" button to add a new configuration, select "Flutter" from the list of templates, and give your configuration a name.
-->Choose your target device: In the run configuration window, select the target device you want to use to run your app.Choose from a physical device connected to your computer(preferably a mobile).
-->Run the app: Once you've set up your run configuration and chosen your target device, click the "Run" button to launch the app. IntelliJ IDEA will build the app and deploy it to your target device.
+1. Open your Flutter project in IntelliJ IDEA: Open IntelliJ IDEA and select "Open" from the "File" menu. Navigate to the project directory and select it.
 
-That's it! You should now be able to run your Flutter app in IntelliJ IDEA. 
+2. Install the Flutter and Dart plugins. Go to "Settings" (or "Preferences" on a Mac), select "Plugins", and search for "Flutter" and "Dart".
+
+3. Set up a Flutter run configuration. To run your Flutter app, set up a run configuration. Open the "Run" menu and select "Edit Configurations". Click the "+" button to add a new configuration, select "Flutter" from the list of templates, and give your configuration a name.
+
+4. Choose your target device. In the run configuration window, select the target device you want to use to run your app. Choose from a physical device connected to your computer(preferably a mobile).
+
+5. Run the app. Once you've set up your run configuration and chosen your target device, click the "Run" button to launch the app. IntelliJ IDEA will build the app and deploy it to your target device.
+
+That's it! You should now be able to run your Flutter app! 
