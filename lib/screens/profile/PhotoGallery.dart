@@ -10,6 +10,7 @@ class Picture {
   final double longitude;
   Picture(this.image, this.name, this.latitude, this.longitude);
 
+
 }
 
 class PictureGallery extends StatefulWidget {

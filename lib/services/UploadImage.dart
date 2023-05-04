@@ -9,60 +9,60 @@ import 'package:geolocator/geolocator.dart';
 import 'package:path/path.dart' as Path;
 import 'package:http/http.dart' as http;
 import 'package:geolocator/geolocator.dart';
-import 'package:geodesy/geodesy.dart';
+// import 'package:geodesy/geodesy.dart';
 
 final double uploadRadius = 100.0; // Radius in meters
 
 //first check if the image can be uploaded or not
 
-Future<bool> imageuploadcheck() async {
-  Position position = await Geolocator.getCurrentPosition();
-  LatLng currentLocation = LatLng(position.latitude, position.longitude);
+// Future<bool> imageuploadcheck() async {
+//   Position position = await Geolocator.getCurrentPosition();
+//   LatLng currentLocation = LatLng(position.latitude, position.longitude);
 
-  bool canUpload = true;
-  List<LatLng> existingUploadLocations =
-      []; // Replace with existing upload locations
+//   bool canUpload = true;
+//   List<LatLng> existingUploadLocations =
+//       []; // Replace with existing upload locations
 
-  final QuerySnapshot userSnapshot =
-      await FirebaseFirestore.instance.collection('users').get();
+//   final QuerySnapshot userSnapshot =
+//       await FirebaseFirestore.instance.collection('users').get();
 
-  for (QueryDocumentSnapshot userDoc in userSnapshot.docs) {
-    String userId = userDoc.id;
+//   for (QueryDocumentSnapshot userDoc in userSnapshot.docs) {
+//     String userId = userDoc.id;
 
-    final QuerySnapshot imageSnapshot = await FirebaseFirestore.instance
-        .collection('images')
-        .doc(userId)
-        .collection('user_images')
-        .get();
+//     final QuerySnapshot imageSnapshot = await FirebaseFirestore.instance
+//         .collection('images')
+//         .doc(userId)
+//         .collection('user_images')
+//         .get();
 
-    for (QueryDocumentSnapshot imageDoc in imageSnapshot.docs) {
-      Map<String, dynamic>? data = imageDoc.data() as Map<String, dynamic>?;
-      print('fck');
-      print(data);
+//     for (QueryDocumentSnapshot imageDoc in imageSnapshot.docs) {
+//       Map<String, dynamic>? data = imageDoc.data() as Map<String, dynamic>?;
+//       print('fck');
+//       print(data);
 
-      existingUploadLocations.add(LatLng(data!['latitude'], data['longitude']));
-    }
+//       existingUploadLocations.add(LatLng(data!['latitude'], data['longitude']));
+//     }
 
-    for (LatLng existingLocation in existingUploadLocations) {
-      Geodesy geodesy = Geodesy();
-      double distance = geodesy
-          .distanceBetweenTwoGeoPoints(currentLocation, existingLocation)
-          .toDouble();
+//     for (LatLng existingLocation in existingUploadLocations) {
+//       // // // Geodesy geodesy = Geodesy();
+//       // double distance = geodesy
+//           .distanceBetweenTwoGeoPoints(currentLocation, existingLocation)
+//           .toDouble();
 
-      if (distance <= uploadRadius) {
-        canUpload = false;
-        break;
-      }
-    }
-  }
-  return canUpload;
-}
+//       if (distance <= uploadRadius) {
+//         canUpload = false;
+//         break;
+//       }
+//     }
+//   }
+//   return canUpload;
+// }
 
 Future<String> uploadImage(XFile file) async {
 
 
-   bool canUpload = await imageuploadcheck();
-
+  //  bool canUpload = await imageuploadcheck();
+  bool canUpload = true;
    if(canUpload == false){
      return 'nospace';
    }

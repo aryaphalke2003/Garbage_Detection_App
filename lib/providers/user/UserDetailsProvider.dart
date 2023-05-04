@@ -100,21 +100,25 @@ _pictures = picturesSnapshot.docs
     _points = points;
     notifyListeners();
   }
+  void setPoints(int points) {
+  _points = points;
+  notifyListeners();
+}
 
-  void setUserDetails(dynamic details) {
-    _fullName = details['firstName'] + ' ' + details['lastName'];
-    _age = details['age'];
-    _firstName = details['firstName'];
+  // void setUserDetails(dynamic details) {
+  //   _fullName = details['firstName'] + ' ' + details['lastName'];
+  //   _age = details['age'];
+  //   _firstName = details['firstName'];
 
-    // _pfpUrl = details['pfpUrl'];
-    //cheking 
-    _points = details['points'];
-    if (details.containsKey('pictures')) {
-      for (var picture in details['pictures']) {
-        _pictures.add(Picture(picture['url'], picture['id'],picture['latitude'],picture['longitude']));
-      }
-    }
-  }
+  //   // _pfpUrl = details['pfpUrl'];
+  //   //cheking 
+  //   _points = details['points'];
+  //   if (details.containsKey('pictures')) {
+  //     for (var picture in details['pictures']) {
+  //       _pictures.add(Picture(picture['url'], picture['id'],picture['latitude'],picture['longitude']));
+  //     }
+  //   }
+  // }
 
   Future<void> deletePicture(String pictureId) async {
     await FirebaseFirestore.instance

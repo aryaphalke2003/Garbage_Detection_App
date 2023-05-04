@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecotags/providers/MapProvider.dart';
 import 'package:ecotags/screens/loading.dart';
-import 'package:ecotags/services/ApiServices.dart';
+// import 'package:ecotags/services/ApiServices.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -222,19 +222,19 @@ class _MapWidgetState extends State<MapWidget> {
             MapObject(
               id: imageDoc.id,
               mapObjectType: MapObjectTypes.imageLocation,
-              latitude: data!['latitude'],
+              latitude: data['latitude'],
               longitude: data['longitude'],
               title: 'img',
               details: 'img',
               imageurl: data['url'],
             ),
           );
-        } else if (data!['extent'] <= 8) {
+        } else if (data['extent'] <= 8) {
           locations.add(
             MapObject(
               id: imageDoc.id,
               mapObjectType: MapObjectTypes.userPosition,
-              latitude: data!['latitude'],
+              latitude: data['latitude'],
               longitude: data['longitude'],
               title: 'img',
               details: 'img',
@@ -246,7 +246,7 @@ class _MapWidgetState extends State<MapWidget> {
             MapObject(
               id: imageDoc.id,
               mapObjectType: MapObjectTypes.nonUserPosition,
-              latitude: data!['latitude'],
+              latitude: data['latitude'],
               longitude: data['longitude'],
               title: 'img',
               details: 'img',

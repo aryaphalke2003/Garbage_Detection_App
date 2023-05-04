@@ -4,10 +4,9 @@ import 'package:ecotags/screens/camera/camera.dart';
 import 'package:ecotags/screens/loading.dart';
 import 'package:ecotags/screens/map/hamburger.dart';
 import 'package:ecotags/screens/map/map.dart';
-
 import 'package:ecotags/screens/map/maputils.dart';
 import 'package:ecotags/screens/profile/Profile.dart';
-import 'package:ecotags/services/ApiServices.dart';
+// import 'package:ecotags/services/ApiServices.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -45,7 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
       longitude: 0.0,
       title: 'Test',
       details: 'Test',
-      imageurl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fnature%2F&psig=AOvVaw0tGasV8WyxixbiRdFblGKr&ust=1682708677654000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLjL2Lrgyv4CFQAAAAAdAAAAABAE',
+      imageurl:
+          'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fnature%2F&psig=AOvVaw0tGasV8WyxixbiRdFblGKr&ust=1682708677654000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLjL2Lrgyv4CFQAAAAAdAAAAABAE',
     ),
   ];
 
@@ -58,19 +58,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // define a funciton to convert MapObject to Marker
 
-  @override
-  void initState() {
-    super.initState();
-    _getUserDetails().then((value) => setState(() {
-          // set in Provider
-          Provider.of<UserDetailsProvider>(context, listen: false)
-              .setUserDetails(value);
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _getUserDetails().then((value) => setState(() {
+  //         // set in Provider
+  //         Provider.of<UserDetailsProvider>(context, listen: false)
+  //             .setUserDetails(value);
 
-          isLoading = false;
-        }));
-    // _getName();
-    // _getMapObjects();
-  }
+  //         isLoading = false;
+  //       }));
+  //   // _getName();
+  //   // _getMapObjects();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -124,10 +124,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ]));
   }
 
-  Future<Object> _getUserDetails() async {
-    // make a getApiCall to get user details
-    // return the user details
-    ApiResponse response = await getApiCall("getUser");
-    return response.data;
-  }
+  // Future<Object> _getUserDetails() async {
+  //   // make a getApiCall to get user details
+  //   // return the user details
+  //   ApiResponse response = await getApiCall("getUser");
+  //   return response.data;
+  // }
 }

@@ -45,6 +45,7 @@ dependencies:
   google_nav_bar: ^5.0.6
   mockito: ^5.4.0
   provider: ^5.0.0
+  test: ^1.22.0
 
 dev_dependencies:
   coverage: ^1.6.3
