@@ -17,11 +17,11 @@ samples, guidance on mobile development, and a full API reference.
 
 
 
-
 # Steps to run(Windows):
 
 # Get the Flutter SDK
-->Download and install the latest release of  Flutter SDK.
+->Download and install the latest release of  Flutter SDK from [https://docs.flutter.dev/get-started/install/windows]
+
 ->Extract the zip file and place the contained flutter in the desired installation location for the Flutter SDK.
 
 # Update your path
@@ -32,7 +32,8 @@ samples, guidance on mobile development, and a full API reference.
 ->Run the command 'flutter doctor' to see if there are any platform dependencies you need to complete the setup.
 
 # Install Android Studio
-->Download and install Android Studio. 
+->Download and install Android Studio from [https://developer.android.com/studio]
+
 ->Run flutter doctor to confirm that Flutter has located your installation of Android Studio. If Flutter cannot locate it, run 'flutter config --android-studio-dir=<directory>' to set the directory that Android Studio is installed to.
 
 
