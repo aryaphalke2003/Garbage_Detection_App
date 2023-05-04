@@ -1,16 +1,19 @@
 # ecotags
 
-A new Flutter application that helps users track and reduce their carbon footprint by providing suggestions for eco-friendly choices and tracking progress over time.
+A new Flutter application that helps users track and reduce their carbon footprint!
+
 
 ## Getting Started
 
 This project is a starting point for a Flutter application. Follow these steps to get started:
+
 
 ### Get the Flutter SDK
 
 1. Download and install the latest release of the Flutter SDK from the official [Flutter website](https://flutter.dev/docs/get-started/install).
 
 2. Extract the zip file and place the contained `flutter` folder in the desired installation location.
+
 
 ### Update your path
 
@@ -20,11 +23,13 @@ This project is a starting point for a Flutter application. Follow these steps t
 
 3. Run the command `flutter doctor` to see if there are any platform dependencies you need to complete the setup.
 
+
 ### Install Android Studio
 
 1. Download and install Android Studio from the official [Android Studio website](https://developer.android.com/studio).
 
 2. Run `flutter doctor` to confirm that Flutter has located your installation of Android Studio. If Flutter cannot locate it, run `flutter config --android-studio-dir=<directory>` to set the directory that Android Studio is installed to.
+
 
 ### Set up your Android device
 
@@ -34,11 +39,13 @@ This project is a starting point for a Flutter application. Follow these steps t
 
 3. In your terminal, run the `flutter devices` command to verify that Flutter recognizes your connected Android device.
 
+
 ### Agree to Android Licenses
 
 1. Make sure that you have a version of Java 11 installed and that your `JAVA_HOME` environment variable is set to the JDK's folder.
 
 2. Agree to the licenses of the Android SDK platform using the command `flutter doctor --android-licenses`.
+
 
 ### Run the Flutter app
 
@@ -52,4 +59,8 @@ This project is a starting point for a Flutter application. Follow these steps t
 
 5. Run the app. Once you've set up your run configuration and chosen your target device, click the "Run" button to launch the app. IntelliJ IDEA will build the app and deploy it to your target device.
 
+
+
 That's it! You should now be able to run your Flutter app! 
+
+
