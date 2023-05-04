@@ -1,10 +1,15 @@
-server/node_modules
-/build
-/.dart_tool
+# Ignore node_modules folders
+server/node_modules/
+/node_modules/
+
+# Ignore build output
+/build/
+/output/
+
+# Ignore Dart build artifacts
+/.dart_tool/
 pubspec.lock
-/node_modules
-/output
-ui-debug.log
-build/
+
+# Ignore testing coverage files
 coverage/
-/coverage
+ui-debug.log
