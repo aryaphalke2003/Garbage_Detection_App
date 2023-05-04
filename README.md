@@ -49,7 +49,9 @@ This project is a starting point for a Flutter application. Follow these steps t
 
 ### Run the Flutter App
 
-1. Extract the folder and open it in Visual Studio Code. Open terminal in the main folder where all your subfolders are present.
+1. Extract the folder and open it in Visual Studio Code. 
+
+2. Open terminal & navigate to softygcollect folder which has all subfolders and flutter plugins.
 
 2. To run app on android first do all mentioned things to setup your android device.
 
