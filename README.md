@@ -31,7 +31,7 @@ This project is a starting point for a Flutter application. Follow these steps t
 2. Run `flutter doctor` to confirm that Flutter has located your installation of Android Studio. If Flutter cannot locate it, run `flutter config --android-studio-dir=<directory>` to set the directory that Android Studio is installed to.
 
 
-### Set up your Android device
+### Set up your Android Device
 
 1. Enable Developer options and USB debugging on your device.
 
@@ -47,18 +47,25 @@ This project is a starting point for a Flutter application. Follow these steps t
 2. Agree to the licenses of the Android SDK platform using the command `flutter doctor --android-licenses`.
 
 
-### Run the Flutter app
+### Run the Flutter App
 
-1. Open your Flutter project in IntelliJ IDEA: Open IntelliJ IDEA and select "Open" from the "File" menu. Navigate to the project directory and select it.
+1. Extract the folder and open it in Visual Studio Code. Open terminal in the main folder where all your subfolders are present.
 
-2. Install the Flutter and Dart plugins. Go to "Settings" (or "Preferences" on a Mac), select "Plugins", and search for "Flutter" and "Dart".
+2. To run app on android first do all mentioned things to setup your android device.
 
-3. Set up a Flutter run configuration. To run your Flutter app, set up a run configuration. Open the "Run" menu and select "Edit Configurations". Click the "+" button to add a new configuration, select "Flutter" from the list of templates, and give your configuration a name.
+3. Once you can see your device then connect to it.
 
-4. Choose your target device. In the run configuration window, select the target device you want to use to run your app. Choose from a physical device connected to your computer(preferably a mobile).
+4. Run following command to install dependencies & do check terminal is open in main folder:
+```
+flutter pub get
+```
 
-5. Run the app. Once you've set up your run configuration and chosen your target device, click the "Run" button to launch the app. IntelliJ IDEA will build the app and deploy it to your target device.
+5. Once all dependencies are installed run & app will open in your phone:
+```
+flutter run
+```
 
+6. Another option is to install the `ecotags.apk` file on your android phone.
 
 
 That's it! You should now be able to run your Flutter app! 
