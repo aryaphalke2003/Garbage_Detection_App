@@ -3,7 +3,8 @@ server/node_modules
 /.dart_tool
 pubspec.lock
 /node_modules
-
 /output
-/ui-debug.log
-coverage
+ui-debug.log
+build/
+coverage/
+/coverage
