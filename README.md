@@ -1,4 +1,4 @@
-# ecotags
+# EcoTags
 
 A new Flutter application that helps users track and reduce their carbon footprint!
 
