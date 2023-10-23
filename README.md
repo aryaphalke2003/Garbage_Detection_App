@@ -2,6 +2,57 @@
 
 A new Flutter application that helps users track and reduce their carbon footprint!
 
+## App 
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="./img/homepage.png" width="200">
+    </td>
+    <td align="center">
+      <img src="./img/register.png" width="200">
+    </td>
+    <td align="center">
+      <img src="./img/login.png" width="200">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      Home Page
+    </td>
+    <td align="center">
+      Register Page
+    </td>
+    <td align="center">
+      Login Page
+    </td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td align="center">
+      <img src="./img/profile.png" width="200">
+    </td>
+    <td align="center">
+      <img src="./img/map.png" width="200">
+    </td>
+    <td align="center">
+      <img src="./img/locationtag.png" width="200">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      Profile Page
+    </td>
+    <td align="center">
+      Map Page
+    </td>
+    <td align="center">
+      Zoom Tags
+    </td>
+  </tr>
+</table>
+
 
 ## Getting Started
 
