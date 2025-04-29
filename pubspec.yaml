@@ -32,7 +32,7 @@ dependencies:
   camera: ^0.8.1
   cloud_firestore: null
   cupertino_icons: ^1.0.2
-  dio: ^4.0.6
+  dio: ^5.3.2
   firebase_auth: null
   firebase_core: null
   firebase_storage: null
